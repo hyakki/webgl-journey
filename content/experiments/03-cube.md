@@ -7,7 +7,6 @@ cover: ./../images/covers/03-cube.png
 ---
 
 ## Content 
-Test
 
 ## Code highlights
 
