@@ -1,0 +1,15 @@
+[class*='wrap--'],
+.wrap {
+  width: 100%;
+  max-width: $wrapper-max-width;
+  margin: 0 auto;
+
+  &[class*='--redux'] {
+    max-width: $wrapper-redux-max-width;
+  }
+
+  @include mq(l) {
+    flex-direction: row;
+  }
+}
+

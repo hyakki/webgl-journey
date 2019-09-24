@@ -1,0 +1,107 @@
+/**
+ * Dev, based on $env (from gulp)
+ */
+$env: 'dev' !default;
+
+
+/**
+ * Colors
+ * for the naming use http://name-of-color.com/
+ * from darker to lighter ?
+ */
+
+// Global colors
+$black: rgb(0, 0, 0);
+$gray-darkest: rgb(32, 32, 32);
+$gray-darker: rgb(64, 64, 64);
+$gray-dark: rgb(96, 96, 96);
+$gray-medium: rgb(128, 128, 128);
+$gray-light: rgb(160, 160, 160);
+$gray-lighter: rgb(192, 192, 192);
+$gray-lightest: rgb(224, 224, 224);
+$white: rgb(255, 255, 255);
+$transparent: transparent;
+
+// Project colors
+$c-gray-darkest: #333;
+$c-gray-light: #868686;
+$c-gray-lighter: #a0a0a0;
+$c-gray-lightest: #d8d8d8;
+$c-gray-lightester: #fbfbfb;
+
+// Form colors
+$c-form-default: $c-gray-light;
+$c-form-success: #64a964;
+$c-form-error: #f00;
+
+// Dev colors
+$c-dev-bg: #3e4b55;
+$c-dev-error: #d90b0b;
+$c-dev-warning: #f50;
+$c-dev-info: #829deb;
+
+$c-dev: $c-dev-error;
+
+// Semantic/project colors
+$c-dark: $black;
+$c-light: $white;
+
+// Z Layers
+$z-layers: (
+  lowest: 0,
+  lower: 10,
+  low: 20,
+  high: 30,
+  higher: 40,
+  highest: 50,
+  infinite: 999,
+);
+
+/**
+ * Typography
+ */
+
+$base-font-size: 18px !default;
+
+$ff-default: 'Roboto Slab', serif;
+$ff-alt: 'Roboto Slab', serif;
+
+$font-sizes: (
+  h1: 3.6rem,
+  h2: 2.8rem,
+  h3: 2.4rem,
+  h4: 1.4rem
+);
+
+// The `scalable-text-map` contains options for our `scalable-text` mixin.
+// For each entry, we define a `min` map and a `max` map.
+// In this example this means:
+// - For a screen < 400px, the `h1` will be 24px.
+// - For a screen > 800px, the `h1` will be 36px.
+// - For any screen size in between, the `h1` will scale between 24px and 36px.
+$scalable-text-map: (
+  h1: (
+    min: (24px, 'small'),
+    max: (36px, 'large')
+  ),
+  p: (
+    min: (13px, 'small'),
+    max: (18px, 'large')
+  )
+);
+
+
+/*
+ * Layout & spacing
+ */
+
+$spacing: 20px;
+$wrapper-max-width: 1280px;
+$wrapper-redux-max-width: 720px;
+
+
+/**
+ * RWD
+ */
+$mq-responsive: true;
+$mq-static-breakpoint: 'large';

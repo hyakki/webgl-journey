@@ -1,0 +1,23 @@
+@import 'utils/variables';
+@import 'vendor/a11y-en';
+
+$c-a11y-bg: $c-dev-bg;
+
+body {
+  &::after {
+    bottom: 2rem;
+    left: 0;
+    min-width: 14rem;
+    background-color: rgba($c-a11y-bg, .75);
+    background-image: linear-gradient(
+      to bottom,
+      transparent, transparent 1.3em,
+      $c-dev-error 1.3em, $c-dev-error 1.5em,
+      transparent 1.5em, transparent 2.6em,
+      $c-dev-warning 2.6em, $c-dev-warning 2.8em,
+      transparent 2.8em, transparent 3.8em,
+      $c-dev-info 3.8em, $c-dev-info 4em,
+      transparent 4em, transparent 100%);
+    font: small-caption;
+  }
+}
