@@ -1,0 +1,60 @@
+<!doctype html>
+<html data-n-head-ssr>
+  <head>
+    <title>webgl-journey-nuxt</title><meta data-n-head="ssr" charset="utf-8"><meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1"><meta data-n-head="ssr" data-hid="description" name="description" content="My first-class Nuxt.js project"><link data-n-head="ssr" rel="icon" type="image/x-icon" href="/favicon.ico"><base href="/webgl-journey-nuxt/"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/da56f34453c313cc945c.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/bc8d89dd549d45996aba.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/16784c74faa24f4b2e94.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/1c14cf75b82d2db39b5f.js" as="script"><style data-vue-ssr-id="3191d5ad:0 932a8f60:0">.nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#fff;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}html{font-family:Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;word-spacing:1px;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;box-sizing:border-box}*,:after,:before{box-sizing:border-box;margin:0}.button--green{display:inline-block;border-radius:4px;border:1px solid #3b8070;color:#3b8070;text-decoration:none;padding:10px 30px}.button--green:hover{color:#fff;background-color:#3b8070}.button--grey{display:inline-block;border-radius:4px;border:1px solid #35495e;color:#35495e;text-decoration:none;padding:10px 30px;margin-left:15px}.button--grey:hover{color:#fff;background-color:#35495e}</style>
+  </head>
+  <body>
+    <div data-server-rendered="true" id="__nuxt"><!----><div id="__layout"><div><div><div>
+    /experiment/04-regl<br>
+    2019-09-24<br>
+    04-regl<br>
+    04-regl<br></div> <div class="frame"><div classname="frame-inner wrap--redux"><canvas id="canvas" width="800" height="600" class="frame__canvas"></canvas></div></div> <hr> <div><h2>Content</h2>
+<h2>Code highlights</h2>
+<pre><code class="language-js">this.regl.clear({
+  color: [0.75, 0.85, 0.8, 1.0],
+  depth: 1.0,
+});
+</code></pre>
+<pre><code class="language-js">// In regl, draw operations are specified declaratively using. Each JSON
+// command is a complete description of all state. This removes the need to
+// .bind() things like buffers or shaders. All the boilerplate of setting up
+// and tearing down state is automated.
+this.regl({
+
+  // In a draw call, we can pass the shader source code to regl
+  frag: `
+  precision mediump float;
+  uniform vec4 color;
+  void main () {
+    gl_FragColor = color;
+  }`,
+
+  vert: `
+  precision mediump float;
+  attribute vec2 position;
+  void main () {
+    gl_Position = vec4(position, 0, 1);
+  }`,
+
+  attributes: {
+    position: [
+      [0.0, 0.5],
+      [-0.5, -0.5],
+      [0.5, -0.5]
+    ]
+  },
+
+  uniforms: {
+    color: [0.27, 0.32, 0.3, 1.0],
+  },
+
+  count: 3
+})()
+</code></pre>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://github.com/regl-project/regl" target="_blank">regl-project/regl (github)</a></li>
+</ul>
+</div></div></div></div></div><script>window.__NUXT__=function(e){return{layout:"default",data:[{attributes:{path:"/experiment/04-regl",date:"2019-09-24",title:e,slug:e,cover:"./../images/covers/04-regl.png"},content:'<h2>Content</h2>\n<h2>Code highlights</h2>\n<pre><code class="language-js">this.regl.clear({\n  color: [0.75, 0.85, 0.8, 1.0],\n  depth: 1.0,\n});\n</code></pre>\n<pre><code class="language-js">// In regl, draw operations are specified declaratively using. Each JSON\n// command is a complete description of all state. This removes the need to\n// .bind() things like buffers or shaders. All the boilerplate of setting up\n// and tearing down state is automated.\nthis.regl({\n\n  // In a draw call, we can pass the shader source code to regl\n  frag: `\n  precision mediump float;\n  uniform vec4 color;\n  void main () {\n    gl_FragColor = color;\n  }`,\n\n  vert: `\n  precision mediump float;\n  attribute vec2 position;\n  void main () {\n    gl_Position = vec4(position, 0, 1);\n  }`,\n\n  attributes: {\n    position: [\n      [0.0, 0.5],\n      [-0.5, -0.5],\n      [0.5, -0.5]\n    ]\n  },\n\n  uniforms: {\n    color: [0.27, 0.32, 0.3, 1.0],\n  },\n\n  count: 3\n})()\n</code></pre>\n<h2>Sources</h2>\n<ul>\n<li><a href="https://github.com/regl-project/regl" target="_blank">regl-project/regl (github)</a></li>\n</ul>\n'}],error:null,serverRendered:!0}}("04-regl")</script><script src="/webgl-journey-nuxt/_nuxt/da56f34453c313cc945c.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/1c14cf75b82d2db39b5f.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/bc8d89dd549d45996aba.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/16784c74faa24f4b2e94.js" defer></script>
+  </body>
+</html>

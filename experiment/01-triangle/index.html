@@ -1,0 +1,126 @@
+<!doctype html>
+<html data-n-head-ssr>
+  <head>
+    <title>webgl-journey-nuxt</title><meta data-n-head="ssr" charset="utf-8"><meta data-n-head="ssr" name="viewport" content="width=device-width,initial-scale=1"><meta data-n-head="ssr" data-hid="description" name="description" content="My first-class Nuxt.js project"><link data-n-head="ssr" rel="icon" type="image/x-icon" href="/favicon.ico"><base href="/webgl-journey-nuxt/"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/da56f34453c313cc945c.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/bc8d89dd549d45996aba.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/16784c74faa24f4b2e94.js" as="script"><link rel="preload" href="/webgl-journey-nuxt/_nuxt/1c14cf75b82d2db39b5f.js" as="script"><style data-vue-ssr-id="3191d5ad:0 932a8f60:0">.nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#fff;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}html{font-family:Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;font-size:16px;word-spacing:1px;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;box-sizing:border-box}*,:after,:before{box-sizing:border-box;margin:0}.button--green{display:inline-block;border-radius:4px;border:1px solid #3b8070;color:#3b8070;text-decoration:none;padding:10px 30px}.button--green:hover{color:#fff;background-color:#3b8070}.button--grey{display:inline-block;border-radius:4px;border:1px solid #35495e;color:#35495e;text-decoration:none;padding:10px 30px;margin-left:15px}.button--grey:hover{color:#fff;background-color:#35495e}</style>
+  </head>
+  <body>
+    <div data-server-rendered="true" id="__nuxt"><!----><div id="__layout"><div><div><div>
+    /experiment/01-triangle<br>
+    2019-09-03<br>
+    01-triangle<br>
+    01-triangle<br></div> <div class="frame"><div classname="frame-inner wrap--redux"><canvas id="canvas" width="800" height="600" class="frame__canvas"></canvas></div></div> <hr> <div><h2>Content</h2>
+<p>Adipisicing doloremque excepturi itaque a officiis? Ducimus velit ipsam repellendus eveniet eos est. Nam quaerat voluptatum corporis in recusandae. Sapiente molestias odio nihil sequi quis Recusandae porro in similique eligendi.</p>
+<h2>Code highlights</h2>
+<pre><code class="language-js">const canvas = this.$el.querySelector('#canvas');
+const gl = canvas.getContext('webgl');
+
+const vertexShaderT = `
+    precision mediump float;
+    attribute vec2 vertPosition;
+    attribute vec3 vertColor;
+    varying vec3 fragColor;
+    void main() {
+      fragColor = vertColor;
+      gl_Position = vec4(vertPosition, 0.0, 1.0);
+    }
+  `;
+
+const fragmentShaderT = `
+    precision mediump float;
+    varying vec3 fragColor;
+    void main() {
+      gl_FragColor = vec4(fragColor, 1.0);
+    }
+  `;
+</code></pre>
+<h3>Init</h3>
+<pre><code class="language-js">gl.clearColor(0.75, 0.85, 0.8, 1.0);
+gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+</code></pre>
+<h3>Create shaders</h3>
+<pre><code class="language-js">const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+
+gl.shaderSource(vertexShader, vertexShaderT);
+gl.shaderSource(fragmentShader, fragmentShaderT);
+</code></pre>
+<h3>Compile shaders</h3>
+<pre><code class="language-js">gl.compileShader(vertexShader);
+if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+  console.error('VERTEX SHADER : COMPILE ERROR', gl.getShaderInfoLog(vertexShader))
+}
+
+gl.compileShader(fragmentShader);
+if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+  console.error('FRAGMENT SHADER : COMPILE ERROR', gl.getShaderInfoLog(fragmentShader))
+}
+</code></pre>
+<h3>Create program</h3>
+<pre><code class="language-js">const program = gl.createProgram();
+gl.attachShader(program, vertexShader);
+gl.attachShader(program, fragmentShader);
+</code></pre>
+<h3>Link program</h3>
+<pre><code class="language-js">gl.linkProgram(program);
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+  console.error('LINK PROGRAM : ERROR', gl.getProgramInfoLog(program));
+}
+</code></pre>
+<h3>Validate program</h3>
+<pre><code class="language-js">gl.validateProgram(program);
+if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
+  console.error('VALIDATE PROGRAM : ERROR', gl.getProgramInfoLog(program));
+}
+</code></pre>
+<h3>Create Buffer</h3>
+<pre><code class="language-js">const vertices = new Float32Array([
+  0.0, 0.5, 1.0, 1.0, 0.0,
+  -0.5, -0.5, 0.7, 0.0, 1.0,
+  0.5, -0.5, 0.1, 1.0, 0.6,
+]);
+
+const buffer = gl.createBuffer();
+
+gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+</code></pre>
+<h3>Create positionAttribLocation</h3>
+<pre><code class="language-js">const positionAttribLocation = gl.getAttribLocation(program, 'vertPosition');
+
+gl.vertexAttribPointer(
+  positionAttribLocation,
+  2,
+  gl.FLOAT,
+  gl.FALSE,
+  5 * Float32Array.BYTES_PER_ELEMENT,
+  0,
+);
+
+gl.enableVertexAttribArray(positionAttribLocation);
+</code></pre>
+<h3>Create colorAttribLocation</h3>
+<pre><code class="language-js">const colorAttribLocation = gl.getAttribLocation(program, 'vertColor');
+
+gl.vertexAttribPointer(
+  colorAttribLocation,
+  3,
+  gl.FLOAT,
+  gl.FALSE,
+  5 * Float32Array.BYTES_PER_ELEMENT,
+  2 * Float32Array.BYTES_PER_ELEMENT,
+);
+
+gl.enableVertexAttribArray(colorAttribLocation);
+</code></pre>
+<h3>Use program & Draw</h3>
+<pre><code class="language-js">gl.useProgram(program);
+
+gl.drawArrays(
+  gl.TRIANGLES,
+  0,
+  3,
+);
+</code></pre>
+</div></div></div></div></div><script>window.__NUXT__=function(e){return{layout:"default",data:[{attributes:{path:"/experiment/01-triangle",date:"2019-09-03",title:e,slug:e,cover:"./../images/covers/01-triangle.png"},content:'<h2>Content</h2>\n<p>Adipisicing doloremque excepturi itaque a officiis? Ducimus velit ipsam repellendus eveniet eos est. Nam quaerat voluptatum corporis in recusandae. Sapiente molestias odio nihil sequi quis Recusandae porro in similique eligendi.</p>\n<h2>Code highlights</h2>\n<pre><code class="language-js">const canvas = this.$el.querySelector(\'#canvas\');\nconst gl = canvas.getContext(\'webgl\');\n\nconst vertexShaderT = `\n    precision mediump float;\n    attribute vec2 vertPosition;\n    attribute vec3 vertColor;\n    varying vec3 fragColor;\n    void main() {\n      fragColor = vertColor;\n      gl_Position = vec4(vertPosition, 0.0, 1.0);\n    }\n  `;\n\nconst fragmentShaderT = `\n    precision mediump float;\n    varying vec3 fragColor;\n    void main() {\n      gl_FragColor = vec4(fragColor, 1.0);\n    }\n  `;\n</code></pre>\n<h3>Init</h3>\n<pre><code class="language-js">gl.clearColor(0.75, 0.85, 0.8, 1.0);\ngl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);\n</code></pre>\n<h3>Create shaders</h3>\n<pre><code class="language-js">const vertexShader = gl.createShader(gl.VERTEX_SHADER);\nconst fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);\n\ngl.shaderSource(vertexShader, vertexShaderT);\ngl.shaderSource(fragmentShader, fragmentShaderT);\n</code></pre>\n<h3>Compile shaders</h3>\n<pre><code class="language-js">gl.compileShader(vertexShader);\nif (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {\n  console.error(\'VERTEX SHADER : COMPILE ERROR\', gl.getShaderInfoLog(vertexShader))\n}\n\ngl.compileShader(fragmentShader);\nif (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {\n  console.error(\'FRAGMENT SHADER : COMPILE ERROR\', gl.getShaderInfoLog(fragmentShader))\n}\n</code></pre>\n<h3>Create program</h3>\n<pre><code class="language-js">const program = gl.createProgram();\ngl.attachShader(program, vertexShader);\ngl.attachShader(program, fragmentShader);\n</code></pre>\n<h3>Link program</h3>\n<pre><code class="language-js">gl.linkProgram(program);\nif (!gl.getProgramParameter(program, gl.LINK_STATUS)) {\n  console.error(\'LINK PROGRAM : ERROR\', gl.getProgramInfoLog(program));\n}\n</code></pre>\n<h3>Validate program</h3>\n<pre><code class="language-js">gl.validateProgram(program);\nif (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {\n  console.error(\'VALIDATE PROGRAM : ERROR\', gl.getProgramInfoLog(program));\n}\n</code></pre>\n<h3>Create Buffer</h3>\n<pre><code class="language-js">const vertices = new Float32Array([\n  0.0, 0.5, 1.0, 1.0, 0.0,\n  -0.5, -0.5, 0.7, 0.0, 1.0,\n  0.5, -0.5, 0.1, 1.0, 0.6,\n]);\n\nconst buffer = gl.createBuffer();\n\ngl.bindBuffer(gl.ARRAY_BUFFER, buffer);\ngl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);\n</code></pre>\n<h3>Create positionAttribLocation</h3>\n<pre><code class="language-js">const positionAttribLocation = gl.getAttribLocation(program, \'vertPosition\');\n\ngl.vertexAttribPointer(\n  positionAttribLocation,\n  2,\n  gl.FLOAT,\n  gl.FALSE,\n  5 * Float32Array.BYTES_PER_ELEMENT,\n  0,\n);\n\ngl.enableVertexAttribArray(positionAttribLocation);\n</code></pre>\n<h3>Create colorAttribLocation</h3>\n<pre><code class="language-js">const colorAttribLocation = gl.getAttribLocation(program, \'vertColor\');\n\ngl.vertexAttribPointer(\n  colorAttribLocation,\n  3,\n  gl.FLOAT,\n  gl.FALSE,\n  5 * Float32Array.BYTES_PER_ELEMENT,\n  2 * Float32Array.BYTES_PER_ELEMENT,\n);\n\ngl.enableVertexAttribArray(colorAttribLocation);\n</code></pre>\n<h3>Use program &amp; Draw</h3>\n<pre><code class="language-js">gl.useProgram(program);\n\ngl.drawArrays(\n  gl.TRIANGLES,\n  0,\n  3,\n);\n</code></pre>\n'}],error:null,serverRendered:!0}}("01-triangle")</script><script src="/webgl-journey-nuxt/_nuxt/da56f34453c313cc945c.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/1c14cf75b82d2db39b5f.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/bc8d89dd549d45996aba.js" defer></script><script src="/webgl-journey-nuxt/_nuxt/16784c74faa24f4b2e94.js" defer></script>
+  </body>
+</html>
