@@ -29,7 +29,7 @@
   export default {
 		computed: {
 			post () {
-				const posts = this.$store.state.posts.list;
+				const posts = this.$store.state.posts;
 				const { id } = this.$route.params;
 
 				return posts.find(p => p.attributes.slug === id);
