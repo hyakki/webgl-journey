@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-      {{ attributes.path }}<br>
-      {{ attributes.date }}<br>
-      {{ attributes.title }}<br>
-      {{ attributes.slug }}<br>
+      {{ post.attributes.path }}<br>
+      {{ post.attributes.date }}<br>
+      {{ post.attributes.title }}<br>
+      {{ post.attributes.slug }}<br>
     </div>
 
     <div class="frame">
@@ -20,29 +20,29 @@
 
     <hr>
 
-    <div v-html="content" />
+    <div v-html="post.html" />
 
   </div>
 </template>
 
 <script>
   export default {
-    async asyncData ({ params }) {
-      const res = await import(`~/content/experiments/${params.id}.md`); 
+		computed: {
+			post () {
+				const posts = this.$store.state.posts.list;
+				const { id } = this.$route.params;
 
-      return {
-        attributes: res.attributes,   
-        content: res.html,
-      };
-    },
+				return posts.find(p => p.attributes.slug === id);
+			}
+		},
 
     mounted() {
-      this.foo();   
+      this.foo();
     },
 
     methods: {
       async foo() {
-        const exp = await import(`~/assets/js/experiments/${this.attributes.slug}`);
+        const exp = await import(`~/assets/js/experiments/${this.post.attributes.slug}`);
         
         new exp.default(this.$refs.canvas);
       }, 
