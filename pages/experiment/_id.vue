@@ -1,3 +1,5 @@
+import 
+
 <template>
   <div>
     <div>
@@ -53,5 +55,6 @@
 <style>
   .frame__canvas {
     width: 100%;  
+    max-width: 800px;
   }
 </style>

@@ -1,6 +1,6 @@
-const regl = require('regl');
-const bunny = require('bunny');
-const camera = require('regl-camera');
+import regl from 'regl';
+import bunny from 'bunny';
+import camera from 'regl-camera';
 
 class Exp {
   constructor(canvas) {
@@ -17,7 +17,7 @@ class Exp {
       this.camera(() => {
         this.regl.clear({
           depth: 1,
-          color: [0, 0, 0, 1],
+          color: [0.75, 0.85, 0.8, 1.0],
         });
         this.draw();
       })
@@ -40,7 +40,7 @@ class Exp {
       frag: `
         precision mediump float;
         void main () {
-          gl_FragColor = vec4(1.0);
+          gl_FragColor = vec4(0.3, 0.4, 0.3, 1.0);
         }
       `,
 
@@ -49,7 +49,7 @@ class Exp {
       },
 
       elements: bunny.cells,
-    });
+    })();
   }
 }
 

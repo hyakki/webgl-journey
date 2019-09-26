@@ -1,20 +1,44 @@
 <template>
-  <div>
-    <div v-for="post in posts">
-      <nuxt-link :to="`experiment/${post}`">{{ post}}</nuxt-link>
-    </div>
+  <div class="posts">
+    <template v-for="post in posts">
+      <nuxt-link class="post"
+                 :to="`experiment/${post.attributes.slug}`">
+        <img class="post__picture"
+             :src="require(`../assets/images/covers/${post.attributes.slug}.png`)" />
+      </nuxt-link>
+    </template>
   </div>
 </template>
 
 <script>
   export default {
-    async asyncData ({ params }) {
-      const posts = await import(`~/content/posts`); 
-
-      return {
-        posts: posts.default,
-      };
-    },
+		computed: {
+			posts () {
+				return this.$store.state.posts;
+			}
+		},
   };
 </script>
+
+<style>
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .post {
+    text-decoration: none; 
+    display: block;
+  }
+
+  .post__picture {
+    display: block;
+    width: 100%;  
+  }
+</style>
 
