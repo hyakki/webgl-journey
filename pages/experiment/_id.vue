@@ -42,11 +42,15 @@ import
       this.foo();
     },
 
+    destroyed() {
+      this.exp && this.exp.destroy && this.exp.destroy();
+    },
+
     methods: {
       async foo() {
         const exp = await import(`~/assets/js/experiments/${this.post.attributes.slug}`);
         
-        new exp.default(this.$refs.canvas);
+        this.exp = new exp.default(this.$refs.canvas);
       }, 
     },
   }

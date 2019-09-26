@@ -25,6 +25,7 @@ class Exp {
   }
 
   draw() {
+    console.log('draw:05');
     this.regl({
 
       vert: `
@@ -50,6 +51,10 @@ class Exp {
 
       elements: bunny.cells,
     })();
+  }
+
+  destroy() {
+    this.regl && this.regl.destroy();
   }
 }
 
