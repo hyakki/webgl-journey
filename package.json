@@ -14,7 +14,9 @@
     "deploy": "npm run generate:gh && npm run deploy:gh"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "bunny": "^1.0.1",
+    "nuxt": "^2.0.0",
+    "regl-camera": "^2.1.1"
   },
   "devDependencies": {
     "frontmatter-markdown-loader": "^2.1.0",

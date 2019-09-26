@@ -49,3 +49,9 @@
     },
   }
 </script>
+
+<style>
+  .frame__canvas {
+    width: 100%;  
+  }
+</style>
