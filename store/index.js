@@ -4,24 +4,18 @@ export const state = () => ({
   posts: [],
 })
 
-// export const mutations = {
-//   increment (state) {
-//     state.counter++
-//   }
-// }
+export const mutations = {
+  addPosts (state, payload) {
+    state.posts = payload;
+  }
+}
 
 export const actions = {
-	async nuxtServerInit({ dispatch }) {
+	async nuxtServerInit({ commit }) {
 
-    const promises = posts.map(p => {
-      return getContent(p);
-    });
+    const promises = posts.map(p => getContent(p));
 
-    Promise.all(promises).then(res => {
-      this.state.posts = res;
-    })
-
-		// await dispatch('core/load')
+    commit('addPosts', await Promise.all(promises));
 	}
 }
 

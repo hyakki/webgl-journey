@@ -1,12 +1,8 @@
 import path from 'path';
+import posts from './content/posts';
 
 const generate = {
-  routes: [
-    'experiment/01-triangle',
-    'experiment/02-rectangle',
-    'experiment/03-cube',
-    'experiment/04-regl',
-  ],
+  routes: posts.map(p => `experiment/${p}`),
 };
 
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
