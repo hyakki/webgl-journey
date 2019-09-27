@@ -4,4 +4,5 @@ export default [
   '03-cube',
   '04-regl',
   '05-bunny',
+  '06-normals',
 ];
