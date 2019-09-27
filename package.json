@@ -5,7 +5,8 @@
   "author": "Maxime Parisse",
   "private": true,
   "scripts": {
-    "dev": "HOST=192.168.253.88 nuxt",
+    "dev": "nuxt",
+    "dev:local": "HOST=192.168.253.88 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
