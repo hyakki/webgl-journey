@@ -5,4 +5,5 @@ export default [
   '04-regl',
   '05-bunny',
   '06-normals',
+  '07-look-at',
 ];
