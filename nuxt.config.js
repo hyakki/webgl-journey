@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import posts from './content/posts';
 
@@ -52,8 +53,15 @@ export default {
   */
   modules: [
   ],
+  /*
+  ** Nuxt.js server config
+  */
   server: {
     host: '0.0.0.0', // default: localhost
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt')),
+    },
   },
   /*
   ** Build configuration

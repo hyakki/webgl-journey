@@ -1,10 +1,41 @@
 const glm = require('gl-matrix');
 
 class Exp {
-
-  constructor(canvas) {
+  constructor(canvas, frame) {
     this.canvas = canvas;
+    this.initMeter(frame);
     this.init();
+  }
+
+  initMeter(container) {
+    require('fpsmeter');
+
+    this.meter = new FPSMeter(container, {
+      interval:  100,     // Update interval in milliseconds.
+      smoothing: 10,      // Spike smoothing strength. 1 means no smoothing.
+      show:      'fps',   // Whether to show 'fps', or 'ms' = frame duration in milliseconds.
+      toggleOn:  false, // Toggle between show 'fps' and 'ms' on this event.
+      decimals:  1,       // Number of decimals in FPS number. 1 = 59.9, 2 = 59.94, ...
+      maxFps:    60,      // Max expected FPS value.
+      threshold: 100,     // Minimal tick reporting interval in milliseconds.
+
+      // Meter position
+      position: 'absolute', // Meter position.
+      zIndex:   10,         // Meter Z index.
+      left:     'auto',      // Meter left offset.
+      top:      '0px',      // Meter top offset.
+      right:    '0px',     // Meter right offset.
+      bottom:   'auto',     // Meter bottom offset.
+      margin:   '0 0 0 0',  // Meter margin. Helps with centering the counter when left: 50%;
+
+      // Theme
+      theme: 'colorful', // Meter theme. Build in: 'dark', 'light', 'transparent', 'colorful'.
+      heat:  1,      // Allow themes to use coloring by FPS heat. 0 FPS = red, maxFps = green.
+
+      // Graph
+      graph:   1, // Whether to show history graph.
+      history: 20 // How many history states to show in a g
+    });
   }
 
   init() {
@@ -221,6 +252,7 @@ class Exp {
     let angle = 0;
 
     const loop = () => {
+      this.meter.tick();
       angle = performance.now() / 1000 / 6 * 2 * Math.PI;
       glm.mat4.rotate(yRotationMatrix, identityMatrix, angle, [0, 1, 0]);
       glm.mat4.rotate(xRotationMatrix, identityMatrix, angle / 4, [1, 0, 0]);
@@ -235,6 +267,10 @@ class Exp {
     };
 
     requestAnimationFrame(loop);
+  }
+
+  destroy() {
+    this.meter.destroy();
   }
 }
 

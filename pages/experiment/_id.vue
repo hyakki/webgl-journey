@@ -1,5 +1,10 @@
 <template>
   <div class="inner">
+
+    <div id="info">
+      Infos
+    </div>
+
     <div>
       {{ post.attributes.path }}<br>
       {{ post.attributes.date }}<br>
@@ -7,7 +12,8 @@
       {{ post.attributes.slug }}<br>
     </div>
 
-    <div class="frame">
+    <div class="frame"
+         ref="frame">
       <div className="frame-inner wrap--redux">
         <canvas class="frame__canvas"
                 id="canvas"
@@ -17,8 +23,6 @@
         </canvas>
       </div>
     </div>
-
-    <hr>
 
     <div v-html="post.html" />
 
@@ -56,14 +60,19 @@
       async foo() {
         const exp = await import(`~/assets/js/experiments/${this.post.attributes.slug}`);
         
-        this.exp = new exp.default(this.$refs.canvas);
+        this.exp = new exp.default(this.$refs.canvas, this.$refs.frame);
       }, 
     },
   }
 </script>
 
 <style>
+  .frame {
+    position: relative;
+  }
+
   .frame__canvas {
+    display: block;
     width: 100%;  
     max-width: 800px;
   }
