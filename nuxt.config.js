@@ -59,8 +59,8 @@ export default {
   server: {
     host: '0.0.0.0', // default: localhost
     https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt')),
+      key: fs.readFileSync(path.resolve(__dirname, 'certificates/server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'certificates/server.crt')),
     },
   },
   /*
