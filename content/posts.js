@@ -8,4 +8,5 @@ export default [
   '07-look-at',
   '08-deviceorientation',
   '09-glslify',
+  '10-sphere',
 ];
