@@ -14,12 +14,11 @@ varying vec3 vNormal;
 
 void main () {
   vNormal = normal;
+
   vec4 pos = projection * view * rotationY * vec4(position, 1.0);
   float noise = snoise4(vec4(pos.xyz, time));
 
-  // pos.x = pos.x + (noise / 1.0);
   pos.xyz = pos.xyz + (normal * (noise + 1.0));
-  // pos.z = pos.z + (noise / 1.0);
 
   gl_Position = pos;
 }
