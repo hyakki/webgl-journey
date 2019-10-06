@@ -62,7 +62,7 @@ class Exp {
     );
 
     this.sphere = sphere(2, {
-      segments: 16,
+      segments: 32,
     })
 
     this.rotationY = mat4.rotateY(
