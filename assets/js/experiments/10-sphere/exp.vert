@@ -11,18 +11,17 @@ uniform mat4  rotationY;
 uniform float time;
 
 varying vec3 vVertexNormals;
+varying vec3 vColor;
 
 void main () {
   vVertexNormals = vertexNormals;
 
-  vec4 pos = projection * view * vec4(position, 1.0);
-  float noise = snoise4(vec4(pos.xyz, time));
+  vec3 p = position;
+  float noise = snoise4(vec4(position, time));
 
-  // pos.xyz = pos.xyz + (vertexNormals * sin(time));
+  p += (vertexNormals * (noise / 5.0)); 
 
-  // pos.x = pos.x + (vertexNormals.x);
-  pos.y = pos.y + (vertexNormals.y * noise);
-  // pos.z = pos.z + (vertexNormals.z);
+  vColor = mix(vec3(0.0, 0.2, 0.4), vec3(0.0, 1.0, 1.0), (noise + 1.0) / 2.0);
 
-  gl_Position = pos;
+  gl_Position = projection * view * vec4(p, 1.0);
 }
