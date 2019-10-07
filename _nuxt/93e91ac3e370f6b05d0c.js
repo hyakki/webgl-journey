@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[37],{297:function(n,o,e){"use strict";e.r(o),o.default="precision highp float;\n\nvarying vec3 vVertexNormals;\n\nvoid main () {\n  gl_FragColor = vec4(vVertexNormals * 0.5 + 0.5, 1.0);\n}\n"}}]);
