@@ -1,15 +1,12 @@
 const regl = require('regl');
+import camera from 'regl-camera';
 const glslify = require('glslify');
 const frag = glslify('./exp.frag');
 const vert = glslify('./exp.vert');
 
-// import bunny from 'bunny';
-// import angleNormals from 'angle-normals';
-
-import sphere from 'primitive-sphere';
-
+import icosphere from 'icosphere';
+import normals from 'normals';
 import mat4 from 'gl-mat4';
-import { create, set } from 'gl-vec3';
 
 class Exp {
   constructor(canvas, frame) {
@@ -52,28 +49,18 @@ class Exp {
   }
 
   init() {
-    this.view = mat4.lookAt([], [0, 0, -7], [0, 0, 0], [0, 1, 0]);
-    this.projection = mat4.perspective(
-      [],
-      Math.PI / 4,
-      this.canvas.width / this.canvas.height,
-      0.01,
-      100000.0
-    );
+    this.icosphere = icosphere(4);
 
-    this.sphere = sphere(2, {
-      segments: 32,
-    })
-
-    this.rotationY = mat4.rotateY(
-      mat4.create(),
-      mat4.create(),
-      (Math.PI * 2 / 360) * 190,
-    );
+    this.camera = camera(this.regl, {
+      center: [0, 0, 0],
+      distance: 4,
+    });
 
     this.regl.frame(({time}) => {
-      this.meter.tick();
-      this.draw(time);
+      this.camera(() => {
+        this.meter.tick();
+        this.draw(time);
+      });
     });
   }
 
@@ -89,18 +76,15 @@ class Exp {
       frag,
 
       attributes: {
-        position: this.sphere.positions,
-        normal: this.sphere.normals,
+        position: this.icosphere.positions,
+        vertexNormals: normals.vertexNormals(this.icosphere.cells, this.icosphere.positions),
       },
 
       uniforms: {
-        view: this.view,
-        projection: this.projection,
-        rotationY: this.rotationY,
         time,
       },
 
-      elements: this.sphere.cells,
+      elements: this.icosphere.cells,
     })();
   }
 
