@@ -9,4 +9,5 @@ export default [
   '08-deviceorientation',
   '09-glslify',
   '10-sphere',
+  '11-texture',
 ];
