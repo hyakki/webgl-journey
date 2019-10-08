@@ -21,7 +21,7 @@ class Exp {
       manifest: {
         texture: {
           type: 'image',
-          src: '/textures/box.png',
+          src: require('~/static/textures/box.png'),
           parser: (data) => this.regl.texture({
             data: data,
             mag: 'linear',
