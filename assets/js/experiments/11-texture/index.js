@@ -14,8 +14,6 @@ class Exp {
     this.initMeter(frame);
 
     this.load();
-
-    this.init();
   }
 
   load() {
@@ -23,7 +21,7 @@ class Exp {
       manifest: {
         texture: {
           type: 'image',
-          src: './../assets/js/experiments/11-texture/f-texture.png',
+          src: '/textures/f-texture.png',
           parser: (data) => this.regl.texture({
             data: data,
             mag: 'linear',
@@ -103,6 +101,11 @@ class Exp {
 
       attributes: {
         position: this.box.positions,
+        uv: this.box.uvs,
+      },
+
+      uniforms: {
+        tex: this.texture,
       },
 
       elements: this.box.cells,
