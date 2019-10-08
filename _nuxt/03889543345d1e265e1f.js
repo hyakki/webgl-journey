@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[32],{158:function(e,t){e.exports={attributes:{path:"/experiment/08-deviceorientation",date:"2019-09-28",title:"08-deviceorientation",slug:"08-deviceorientation",cover:"./../images/covers/08-deviceorientation.png"},html:"<h2>Content</h2>\n<h2>Code highlights</h2>\n<h2>Sources</h2>\n"}}}]);

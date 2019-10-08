@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[35],{159:function(e,t){e.exports={attributes:{path:"/experiment/09-glslify",date:"2019-10-05",title:"09-glslify",slug:"09-glslify",cover:"./../images/covers/09-glslify.png"},html:"<h2>Content</h2>\n<h2>Code highlights</h2>\n<h2>Sources</h2>\n"}}}]);
