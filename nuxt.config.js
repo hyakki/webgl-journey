@@ -8,7 +8,7 @@ const generate = {
 
 const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
   router: {
-    base: '/webgl-journey-nuxt/',
+    base: '/webgl-journey/',
   },
 } : {};
 

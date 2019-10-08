@@ -1,4 +1,4 @@
-# webgl-journey-nuxt
+# webgl-journey
 
 > My first-class Nuxt.js project
 
