@@ -74,7 +74,7 @@ class Exp {
 
     const val = (parseInt(gamma) - 25) / 5;
 
-    this.view = mat4.lookAt([], [val, 0, -20], [0, 5, 0], [0, 1, 0]);
+    this.view = mat4.lookAt([], [val, 0, -2], [0, 0, 0], [0, 1, 0]);
   }
 
   draw(time) {

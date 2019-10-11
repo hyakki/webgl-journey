@@ -1,9 +1,10 @@
 const regl = require('regl');
 const resl = require('resl');
-import camera from 'regl-camera';
 const glslify = require('glslify');
 const frag = glslify('./exp.frag');
 const vert = glslify('./exp.vert');
+import mat4 from 'gl-mat4';
+import { create, set } from 'gl-vec3';
 
 import box from 'geo-3d-box';
 
@@ -74,17 +75,24 @@ class Exp {
       segments: [1, 1, 1],
     });
 
-    this.camera = camera(this.regl, {
-      center: [0, 0, 0],
-      distance: 4,
-      zoomSpeed: 0,
-    });
+    this.view = mat4.lookAt([], [0, 2, -4], [0, 0, 0], [0, 1, 0]);
+    this.projection = mat4.perspective(
+      [],
+      Math.PI / 4,
+      this.canvas.width / this.canvas.height,
+      0.01,
+      100000.0
+    );
+
+    this.rotationY = mat4.rotateY(
+      mat4.create(),
+      mat4.create(),
+      (Math.PI * 2 / 360) * 90,
+    );
 
     this.regl.frame(({time}) => {
-      this.camera(() => {
-        this.meter.tick();
-        this.draw(time);
-      });
+			this.meter.tick();
+			this.draw(time);
     });
   }
 
@@ -94,6 +102,12 @@ class Exp {
       color: [0.75, 0.85, 0.8, 1.0],
     });
 
+    this.rotationY = mat4.rotateY(
+      mat4.create(),
+      mat4.create(),
+      (Math.PI * 2 / 360) * time * 50,
+    );
+
     this.regl({
 
       vert,
@@ -101,11 +115,50 @@ class Exp {
 
       attributes: {
         position: this.box.positions,
-        uv: this.box.uvs,
+        uv: [
+					// Right
+					[0, 0],
+					[1, 0],
+					[0, 1],
+					[1, 1],
+
+					// Left
+					[1, 1],
+					[0, 1],
+					[1, 0],
+					[0, 0],
+
+					// Back
+					[1, 1],
+					[0, 1],
+					[1, 0],
+					[0, 0],
+
+					// Front
+					[0, 0],
+					[1, 0],
+					[0, 1],
+					[1, 1],
+
+					// Bottom
+					[1, 1],
+					[1, 0],
+					[0, 1],
+					[0, 0],
+
+					// Top
+					[1, 1],
+					[1, 0],
+					[0, 1],
+					[0, 0],
+        ],
       },
 
       uniforms: {
         tex: this.texture,
+        view: this.view,
+        projection: this.projection,
+        rotationY: this.rotationY,
       },
 
       elements: this.box.cells,
