@@ -10,4 +10,5 @@ export default [
   '09-glslify',
   '10-sphere',
   '11-texture',
+  '12-three',
 ];

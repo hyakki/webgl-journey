@@ -96,6 +96,12 @@ export default {
           loader: 'raw-loader',
         },
       });
+      config.module.rules.push({
+        test: /\.(gltf|obj)$/,
+        use: {
+          loader: 'file-loader',
+        },
+      })
     },
   },
   generate,
