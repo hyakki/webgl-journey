@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[47],{314:function(n,e,o){"use strict";o.r(e),e.default="precision highp float;\n\nvarying vec2 vUv;\n\nuniform sampler2D tex;\n\nvoid main () {\n  gl_FragColor = texture2D(tex,vUv);\n}\n"}}]);

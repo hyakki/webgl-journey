@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{163:function(e,h){e.exports={attributes:{path:"/experiment/13-shake",date:"2019-10-26",title:"13-shake",slug:"13-shake",cover:"./../images/covers/13-shake.png"},html:"<h2>Content</h2>\n<h2>Code highlights</h2>\n<h2>Sources</h2>\n"}}}]);

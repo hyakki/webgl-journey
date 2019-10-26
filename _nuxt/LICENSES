@@ -1,3 +1,5 @@
+//!\ DECLARE ALIAS AFTER assign prototype !
+
 /*!
  * vue-no-ssr v1.1.1
  * (c) 2018-present egoist <0x142857@gmail.com>
