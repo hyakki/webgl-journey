@@ -71,10 +71,24 @@
     position: relative;
   }
 
-  .frame__canvas {
+  .frame-inner {
+    position: relative;
+  }
+
+  .frame::before {
+    content: '';     
+    position: relative;
     display: block;
-    width: 100%;  
-    max-width: 800px;
+    padding-top: 75%;
+  }
+
+  .frame-inner,
+  .frame__canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .inner {

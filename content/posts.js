@@ -11,4 +11,5 @@ export default [
   '10-sphere',
   '11-texture',
   '12-three',
+  '13-shake',
 ];
