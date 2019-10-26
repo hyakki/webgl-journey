@@ -52,7 +52,7 @@ class Exp {
 
     const { camera, renderer, scene, lights, shape } = this.comp;
 
-    scene.background = new Color('#8FD0D2');
+    scene.background = new Color(0.75, 0.85, 0.8);
     renderer.setSize( this.canvas.width, this.canvas.height );
 
     scene.add( lights.ambient );
